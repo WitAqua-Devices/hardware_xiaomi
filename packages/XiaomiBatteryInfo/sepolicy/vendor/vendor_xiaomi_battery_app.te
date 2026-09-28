@@ -1,0 +1,8 @@
+# Read-only battery information app installed on vendor.
+type vendor_xiaomi_battery_app, domain;
+app_domain(vendor_xiaomi_battery_app)
+
+# Framework services required to attach and run an Android app process.
+allow vendor_xiaomi_battery_app app_api_service:service_manager find;
+
+r_dir_file(vendor_xiaomi_battery_app, sysfs_batteryinfo)
