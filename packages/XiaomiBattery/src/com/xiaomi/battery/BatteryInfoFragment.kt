@@ -5,9 +5,9 @@
 package com.xiaomi.battery
 
 import android.os.Bundle
-import androidx.preference.PreferenceFragmentCompat
+import com.android.settingslib.widget.SettingsBasePreferenceFragment
 
-class BatteryInfoFragment : PreferenceFragmentCompat() {
+class BatteryInfoFragment : SettingsBasePreferenceFragment() {
     private lateinit var section: XiaomiBatteryInfoSection
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {

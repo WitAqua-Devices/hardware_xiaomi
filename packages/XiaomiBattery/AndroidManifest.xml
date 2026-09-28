@@ -10,6 +10,8 @@
 >
 
     <uses-permission android:name="com.xiaomi.battery.info.READ_INFO" />
+    <!-- Signature permission for read-only BatteryManager health dates. -->
+    <uses-permission android:name="android.permission.BATTERY_STATS" />
 
     <application
         android:label="@string/app_name"
