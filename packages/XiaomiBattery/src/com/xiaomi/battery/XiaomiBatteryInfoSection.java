@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 import android.content.ContentProviderClient;
 import android.os.RemoteException;
@@ -17,7 +16,6 @@ import com.android.settingslib.utils.ThreadUtils;
 final class XiaomiBatteryInfoSection {
     private static final Uri URI = Uri.parse("content://com.xiaomi.battery.info");
     private final Context mContext;
-    private final PreferenceCategory mCategory;
     private final Preference[] mRows = new Preference[6];
     private final String[] mKeys = {"soh", "adapter_watts", "input_mv", "input_ma", "model", "serial"};
     private final int[] mFormats = {R.string.xiaomi_battery_percent,
@@ -30,12 +28,6 @@ final class XiaomiBatteryInfoSection {
 
     XiaomiBatteryInfoSection(Context context, PreferenceScreen screen) {
         mContext = context;
-        mCategory = new PreferenceCategory(context);
-        mCategory.setKey("xiaomi_battery_info");
-        mCategory.setTitle(R.string.xiaomi_battery_section);
-        mCategory.setOrder(1000);
-        mCategory.setVisible(false);
-        screen.addPreference(mCategory);
         int[] titles = {R.string.xiaomi_battery_soh, R.string.xiaomi_battery_adapter,
                 R.string.xiaomi_battery_input_voltage, R.string.xiaomi_battery_input_current,
                 R.string.xiaomi_battery_model, R.string.xiaomi_battery_serial};
@@ -46,7 +38,7 @@ final class XiaomiBatteryInfoSection {
             row.setSelectable(false);
             row.setPersistent(false);
             row.setVisible(false);
-            mCategory.addPreference(row);
+            screen.addPreference(row);
             mRows[i] = row;
         }
     }
@@ -76,17 +68,14 @@ final class XiaomiBatteryInfoSection {
             final Bundle result = info;
             mHandler.post(() -> {
                 if (!mResumed || generation != mGeneration) return;
-                boolean visible = false;
                 for (int i = 0; i < mRows.length; i++) {
                     boolean available = result != null && result.containsKey(mKeys[i]);
                     mRows[i].setVisible(available);
                     if (available) {
                         mRows[i].setSummary(mFormats[i] == 0 ? result.getString(mKeys[i])
                                 : mContext.getString(mFormats[i], result.getLong(mKeys[i])));
-                        visible = true;
                     }
                 }
-                mCategory.setVisible(visible);
                 mHandler.postDelayed(mRefresh, 3000);
             });
         });

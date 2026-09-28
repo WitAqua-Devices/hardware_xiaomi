@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="xiaomi_battery_section">Xiaomi-specific</string>
     <string name="xiaomi_battery_soh">Fuel-gauge state of health</string>
     <string name="xiaomi_battery_adapter">Adapter maximum power</string>
     <string name="xiaomi_battery_input_voltage">USB input voltage</string>
