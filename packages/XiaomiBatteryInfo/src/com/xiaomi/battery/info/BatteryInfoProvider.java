@@ -26,7 +26,8 @@ public class BatteryInfoProvider extends ContentProvider {
         Bundle result = new Bundle();
         String model = readText("battery/model_name");
         if (model != null) result.putString("model", model);
-        String serial = decodeSerial(readText("battery/soh_sn"));
+        String serial = decodeSerial(readText("battery/batt_sn"));
+        if (serial == null) serial = decodeSerial(readText("battery/soh_sn"));
         if (serial != null) result.putString("serial", serial);
         Long soh = read("bms/soh");
         if (soh != null && soh >= 0 && soh <= 100) result.putLong("soh", soh);
@@ -60,22 +61,9 @@ public class BatteryInfoProvider extends ContentProvider {
         }
     }
 
-    // Xiaomi's soh_sn exports decimal ASCII bytes rather than a text string.
+    // Xiaomi kernels expose either a plain serial or whitespace-separated ASCII bytes.
     static String decodeSerial(String value) {
-        if (value == null) return null;
-        StringBuilder decoded = new StringBuilder();
-        try {
-            for (String token : value.split("\\s+")) {
-                int ch = Integer.parseInt(token);
-                if (ch == 0) break;
-                if (ch < 32 || ch > 126) return null;
-                decoded.append((char) ch);
-            }
-        } catch (NumberFormatException e) {
-            return null;
-        }
-        String result = decoded.toString().trim();
-        return result.isEmpty() ? null : result;
+        return BatterySerial.parse(value);
     }
 
     @Override public Cursor query(Uri uri, String[] projection, String selection,
