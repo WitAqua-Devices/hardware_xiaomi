@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Convert vendor USB attributes to mV and mA. -->
+    <integer name="config_usb_input_divisor">1000</integer>
+</resources>

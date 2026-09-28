@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.xiaomi.battery.info" android:versionCode="1" android:versionName="1.0">
+    <permission android:name="com.xiaomi.battery.info.READ_INFO"
+        android:protectionLevel="signature" />
+    <application android:label="Xiaomi battery information"
+        android:allowBackup="false" android:directBootAware="true"
+        android:defaultToDeviceProtectedStorage="true" android:hasCode="true">
+        <provider android:name=".BatteryInfoProvider"
+            android:authorities="com.xiaomi.battery.info"
+            android:exported="true"
+            android:permission="com.xiaomi.battery.info.READ_INFO" />
+    </application>
+</manifest>
