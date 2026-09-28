@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: The LineageOS Project
+ * SPDX-FileCopyrightText: 2026 WitAqua
  * SPDX-License-Identifier: Apache-2.0
  */
 

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 WitAqua
+# SPDX-License-Identifier: Apache-2.0
+
 # Read-only battery information app installed on vendor.
 type vendor_xiaomi_battery_app, domain;
 app_domain(vendor_xiaomi_battery_app)
