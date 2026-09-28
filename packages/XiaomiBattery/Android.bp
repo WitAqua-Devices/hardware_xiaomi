@@ -1,0 +1,20 @@
+//
+// SPDX-FileCopyrightText: The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+//
+
+android_app {
+    name: "XiaomiBattery",
+    certificate: "platform",
+    defaults: ["SettingsLibDefaults"],
+    srcs: ["src/**/*.kt", "src/**/*.java"],
+    resource_dirs: ["res"],
+    platform_apis: true,
+    privileged: true,
+    system_ext_specific: true,
+    static_libs: [
+        "androidx.core_core",
+        "androidx.preference_preference",
+        "org.lineageos.settings.resources",
+    ],
+}

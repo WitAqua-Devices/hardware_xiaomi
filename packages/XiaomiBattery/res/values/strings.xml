@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="xiaomi_battery_section">Xiaomi-specific</string>
+    <string name="xiaomi_battery_soh">Fuel-gauge state of health</string>
+    <string name="xiaomi_battery_adapter">Adapter maximum power</string>
+    <string name="xiaomi_battery_input_voltage">USB input voltage</string>
+    <string name="xiaomi_battery_input_current">USB input current</string>
+    <string name="xiaomi_battery_percent">%1$d%%</string>
+    <string name="xiaomi_battery_watts">%1$d W</string>
+    <string name="xiaomi_battery_mv">%1$d mV</string>
+    <string name="xiaomi_battery_ma">%1$d mA</string>
+    <string name="xiaomi_battery_model">Battery model</string>
+    <string name="xiaomi_battery_serial">Battery serial number</string>
+    <string name="app_name">Xiaomi battery information</string>
+    <string name="battery_info_title">Xiaomi battery information</string>
+    <string name="battery_info_summary">Battery health, identity and charger details</string>
+</resources>
