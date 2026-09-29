@@ -16,7 +16,6 @@ import java.nio.file.Paths;
 /** Read-only, fixed-schema access to Xiaomi gauge and charger information. */
 public class BatteryInfoProvider extends ContentProvider {
     private static final String PERMISSION = "com.xiaomi.battery.info.READ_INFO";
-    private static final String BASE = "/sys/class/power_supply/";
 
     @Override public boolean onCreate() { return true; }
 
@@ -24,18 +23,17 @@ public class BatteryInfoProvider extends ContentProvider {
         getContext().enforceCallingOrSelfPermission(PERMISSION, "Battery information");
         if (!"get_info".equals(method)) return null;
         Bundle result = new Bundle();
-        String model = readText("battery/model_name");
+        String model = readText(R.array.config_battery_model_nodes);
         if (model != null) result.putString("model", model);
-        String serial = decodeSerial(readText("battery/batt_sn"));
-        if (serial == null) serial = decodeSerial(readText("battery/soh_sn"));
+        String serial = readSerial(R.array.config_battery_serial_nodes);
         if (serial != null) result.putString("serial", serial);
-        Long soh = read("bms/soh");
+        Long soh = read(R.array.config_battery_soh_nodes);
         if (soh != null && soh >= 0 && soh <= 100) result.putLong("soh", soh);
-        Long apdo = read("usb/apdo_max");
+        Long apdo = read(R.array.config_adapter_watts_nodes);
         if (apdo != null && apdo > 0) result.putLong("adapter_watts", apdo);
         int divisor = getContext().getResources().getInteger(R.integer.config_usb_input_divisor);
-        Long voltage = read("usb/voltage_now");
-        Long current = read("usb/input_current_now");
+        Long voltage = read(R.array.config_usb_voltage_nodes);
+        Long current = read(R.array.config_usb_current_nodes);
         if (divisor > 0 && voltage != null && voltage > 0) {
             result.putLong("input_mv", voltage / divisor);
             if (current != null && current >= 0) result.putLong("input_ma", current / divisor);
@@ -43,20 +41,46 @@ public class BatteryInfoProvider extends ContentProvider {
         return result;
     }
 
-    private static String readText(String node) {
-        try {
-            String value = new String(Files.readAllBytes(Paths.get(BASE + node))).trim();
-            return value.isEmpty() ? null : value;
-        } catch (IOException | SecurityException e) {
-            return null;
-        }
+    private String[] nodes(int array) {
+        return getContext().getResources().getStringArray(array);
     }
 
-    private static Long read(String node) {
-        try {
+    private String readText(int array) {
+        for (String node : nodes(array)) {
             String value = readText(node);
-            return value == null ? null : Long.parseLong(value);
-        } catch (NumberFormatException e) {
+            if (value != null) return value;
+        }
+        return null;
+    }
+
+    // A node can exist and still hold nothing usable, so keep looking past it.
+    private String readSerial(int array) {
+        for (String node : nodes(array)) {
+            String serial = decodeSerial(readText(node));
+            if (serial != null) return serial;
+        }
+        return null;
+    }
+
+    private Long read(int array) {
+        for (String node : nodes(array)) {
+            try {
+                String value = readText(node);
+                if (value != null) return Long.parseLong(value);
+            } catch (NumberFormatException e) {
+                // Try the next node.
+            }
+        }
+        return null;
+    }
+
+    private static String readText(String node) {
+        String path = SysfsNode.resolve(node);
+        if (path == null) return null;
+        try {
+            String value = new String(Files.readAllBytes(Paths.get(path))).trim();
+            return value.isEmpty() ? null : value;
+        } catch (IOException | SecurityException e) {
             return null;
         }
     }

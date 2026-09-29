@@ -6,4 +6,29 @@
 <resources>
     <!-- Convert vendor USB attributes to mV and mA. -->
     <integer name="config_usb_input_divisor">1000</integer>
+
+    <!--
+        Where each value is read from, first readable node wins. Names are
+        relative to /sys/class/power_supply; absolute paths must stay in /sys.
+    -->
+    <string-array name="config_battery_model_nodes" translatable="false">
+        <item>battery/model_name</item>
+    </string-array>
+    <string-array name="config_battery_serial_nodes" translatable="false">
+        <item>battery/batt_sn</item>
+        <item>battery/soh_sn</item>
+        <item>battery/serial_number</item>
+    </string-array>
+    <string-array name="config_battery_soh_nodes" translatable="false">
+        <item>bms/soh</item>
+    </string-array>
+    <string-array name="config_adapter_watts_nodes" translatable="false">
+        <item>usb/apdo_max</item>
+    </string-array>
+    <string-array name="config_usb_voltage_nodes" translatable="false">
+        <item>usb/voltage_now</item>
+    </string-array>
+    <string-array name="config_usb_current_nodes" translatable="false">
+        <item>usb/input_current_now</item>
+    </string-array>
 </resources>
