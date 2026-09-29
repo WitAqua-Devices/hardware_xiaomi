@@ -1,0 +1,9 @@
+// SPDX-FileCopyrightText: 2026 WitAqua
+// SPDX-License-Identifier: Apache-2.0
+android_app {
+    name: "XiaomiBatteryInfo",
+    certificate: "platform",
+    srcs: ["src/**/*.java"],
+    sdk_version: "current",
+    vendor: true,
+}

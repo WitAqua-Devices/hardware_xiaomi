@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    SPDX-FileCopyrightText: 2026 WitAqua
+    SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string name="xiaomi_battery_soh">ゲージの健全性（SOH）</string>
+    <string name="xiaomi_battery_manufacturing_date">製造日</string>
+    <string name="xiaomi_battery_first_usage_date">初回使用日</string>
+    <string name="xiaomi_battery_cycle_count">サイクル回数</string>
+    <string name="xiaomi_battery_full_capacity">最大容量</string>
+    <string name="xiaomi_battery_design_capacity">設計最大容量</string>
+    <string name="battery_technology">テクノロジー</string>
+    <string name="battery_health">健康度</string>
+    <string name="battery_health_good">良い</string>
+    <string name="battery_health_overheat">オーバーヒート</string>
+    <string name="battery_health_dead">死亡</string>
+    <string name="battery_health_over_voltage">過電圧</string>
+    <string name="battery_health_unspecified_failure">不明な問題</string>
+    <string name="battery_health_cold">冷たい</string>
+    <string name="battery_health_unknown">不明</string>
+    <string name="battery_temperature">温度</string>
+    <string name="battery_voltage">電圧</string>
+    <string name="battery_info_unavailable">使用不可</string>
+    <string name="battery_cycle_count_footer">出荷前の品質検査のため、初回使用時にサイクル回数が 0 になっていない場合があります</string>
+    <string name="xiaomi_battery_details">Xiaomi 独自情報</string>
+    <string name="xiaomi_battery_adapter">充電器の最大出力</string>
+    <string name="xiaomi_battery_input_voltage">USB入力電圧</string>
+    <string name="xiaomi_battery_input_current">USB入力電流</string>
+    <string name="xiaomi_battery_model">バッテリー型番</string>
+    <string name="xiaomi_battery_serial">バッテリーシリアル番号</string>
+    <string name="app_name">Xiaomi バッテリー情報</string>
+    <string name="battery_info_title">Xiaomi バッテリー情報</string>
+    <string name="battery_info_summary">バッテリーの健全性・型番・シリアル・充電情報</string>
+</resources>

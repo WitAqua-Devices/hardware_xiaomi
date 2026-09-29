@@ -1,0 +1,21 @@
+//
+// SPDX-FileCopyrightText: 2026 WitAqua
+// SPDX-License-Identifier: Apache-2.0
+//
+
+android_app {
+    name: "XiaomiBattery",
+    certificate: "platform",
+    defaults: ["SettingsLibDefaults"],
+    srcs: ["src/**/*.kt", "src/**/*.java"],
+    resource_dirs: ["res"],
+    platform_apis: true,
+    privileged: true,
+    privapp_allowlist: "privapp_whitelist_com.xiaomi.battery.xml",
+    system_ext_specific: true,
+    static_libs: [
+        "androidx.core_core",
+        "androidx.preference_preference",
+        "org.lineageos.settings.resources",
+    ],
+}
